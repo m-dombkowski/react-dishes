@@ -18,11 +18,13 @@ const AddDishForm = (props) => {
     },
   });
 
+  // this one seems better and more "universal" but doesn't really work with React Final Form values object.
+  // Would need to make separate states for each input and later somehow merge them into one big object
+
   const resettingOtherTypes = (obj, selectedType) => {
     for (const key in obj) {
       if (key !== selectedType) {
         for (const innerKey in obj[key]) {
-          console.log(obj[key]);
           if (obj[key][innerKey]) {
             obj[key][innerKey] = undefined;
           }
@@ -31,16 +33,10 @@ const AddDishForm = (props) => {
     }
   };
 
-  //   const secondLoop = (values) => {
-  //     values.no_of_slices = typeSpecific.pizza.numOfSlices;
-  //     values.spiciness_scale = undefined;
-  //     values.diameter = undefined;
-  //     values.slices_of_bread = undefined;
-  //   };
-
   const required = (value) => (value ? undefined : "Required");
 
-  const onSubmit = (values) => {
+  const onSubmit = (values, event) => {
+    event.preventDefault();
     setTimeout(window.alert(JSON.stringify(values, 0, 2)), 300);
   };
 
@@ -85,7 +81,7 @@ const AddDishForm = (props) => {
   return (
     <Form
       onSubmit={onSubmit}
-      render={({ submitHandler, form, values }) => (
+      render={({ submitHandler, form, values, submitting }) => (
         <form className={styles.form} onSubmit={submitHandler}>
           <div>
             <Field name="name" validate={required}>
@@ -239,6 +235,14 @@ const AddDishForm = (props) => {
               </OnChange>
             </Fragment>
           )}
+          <div>
+            <button type="submit" disabled={submitting}>
+              Submit
+            </button>
+            <button type="button" disabled={submitting} onClick={form.reset}>
+              Clear
+            </button>
+          </div>
 
           <pre>{JSON.stringify(values, 0, 2)}</pre>
         </form>
