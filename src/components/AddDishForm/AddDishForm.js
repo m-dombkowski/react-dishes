@@ -3,6 +3,7 @@ import styles from "./AddDishForm.module.css";
 import { Fragment, useState } from "react";
 import { OnChange } from "react-final-form-listeners";
 import InputField from "../InputField/InputField";
+import { validationObj } from "../../validation/validationFunctions";
 
 const AddDishForm = (props) => {
   const [type, setType] = useState(null);
@@ -34,31 +35,12 @@ const AddDishForm = (props) => {
     }
   };
 
-  const required = (value) => (value ? undefined : "Required");
-
   const onSubmit = (values, event) => {
     event.preventDefault();
-    setTimeout(window.alert(JSON.stringify(values, 0, 2)), 300);
+    alert(values);
   };
 
-  const minValue = (min) => (value) =>
-    isNaN(value) || value >= min ? undefined : `Must be greater than ${min}`;
-
-  const maxValue = (max) => (value) =>
-    isNaN(value) || value <= max ? undefined : `Must be smaller than ${max}`;
-
-  const mustBeNumber = (value) =>
-    isNaN(value) ? "Must be a number" : undefined;
-
-  const multipleValidations =
-    (...validators) =>
-    (value) =>
-      validators.reduce(
-        (error, validator) => error || validator(value),
-        undefined
-      );
-
-  // works but code quality is tragic
+  // works but code quality is tragic. No idea how to make it better with React Final Form values object
   const resetSpecificValuesOnChange = (values, dishType) => {
     switch (dishType) {
       case "soup":
@@ -101,7 +83,7 @@ const AddDishForm = (props) => {
         <form className={styles.form} onSubmit={submitHandler}>
           <InputField
             name="name"
-            validation={required}
+            validation={validationObj.required}
             label="Dish Name"
             type="text"
             placeholder="Dish Name"
@@ -109,7 +91,7 @@ const AddDishForm = (props) => {
 
           <InputField
             name="preparation_time"
-            validation={required}
+            validation={validationObj.required}
             label="Preparation Time"
             type="time"
             step="1"
@@ -117,7 +99,11 @@ const AddDishForm = (props) => {
 
           <div>
             <label>Type</label>
-            <Field name="type" component="select" validate={required}>
+            <Field
+              name="type"
+              component="select"
+              validate={validationObj.required}
+            >
               <option />
               <option value="pizza">Pizza</option>
               <option value="soup">Soup</option>
@@ -127,6 +113,7 @@ const AddDishForm = (props) => {
             <OnChange name="type">
               {(selectValue) => {
                 setType(selectValue);
+                resettingOtherTypes(values, selectValue);
                 resetSpecificValuesOnChange(values, selectValue);
               }}
             </OnChange>
@@ -135,7 +122,7 @@ const AddDishForm = (props) => {
             <Fragment>
               <InputField
                 name="no_of_slices"
-                validation={required}
+                validation={validationObj.required}
                 label="Number of Slices"
                 type="number"
                 placeholder="Number of Slices"
@@ -153,7 +140,7 @@ const AddDishForm = (props) => {
               </OnChange>
               <InputField
                 name="diameter"
-                validation={required}
+                validation={validationObj.required}
                 label="Diameter"
                 type="number"
                 step="0.1"
@@ -173,11 +160,11 @@ const AddDishForm = (props) => {
             <Fragment>
               <InputField
                 name="spiciness_scale"
-                validation={multipleValidations(
-                  required,
-                  mustBeNumber,
-                  minValue(1),
-                  maxValue(10)
+                validation={validationObj.multipleValidations(
+                  validationObj.required,
+                  validationObj.mustBeNumber,
+                  validationObj.minValue(1),
+                  validationObj.maxValue(10)
                 )}
                 label="Spiciness"
                 type="number"
@@ -201,7 +188,10 @@ const AddDishForm = (props) => {
             <Fragment>
               <InputField
                 name="slices_of_bread"
-                validation={multipleValidations(required, mustBeNumber)}
+                validation={validationObj.multipleValidations(
+                  validationObj.required,
+                  validationObj.mustBeNumber
+                )}
                 label="Number of slices of bread required"
                 type="number"
                 placeholder="Bread Slices"
