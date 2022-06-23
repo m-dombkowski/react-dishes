@@ -2,6 +2,7 @@ import { Field, Form } from "react-final-form";
 import styles from "./AddDishForm.module.css";
 import { Fragment, useState } from "react";
 import { OnChange } from "react-final-form-listeners";
+import InputField from "../InputField/InputField";
 
 const AddDishForm = (props) => {
   const [type, setType] = useState(null);
@@ -78,33 +79,42 @@ const AddDishForm = (props) => {
     }
   };
 
+  const Error = ({ name }) => (
+    <Field name={name} subscription={{ error: true, touched: true }}>
+      {({ meta: { error, touched } }) =>
+        error && touched ? <span>{error}</span> : null
+      }
+    </Field>
+  );
+
   return (
     <Form
       onSubmit={onSubmit}
+      // Validation for select form (if nothing is chosen there is an error)
+      validate={(values) => {
+        const error = {};
+        if (!values.type) {
+          error.type = "Required";
+        }
+      }}
       render={({ submitHandler, form, values, submitting }) => (
         <form className={styles.form} onSubmit={submitHandler}>
-          <div>
-            <Field name="name" validate={required}>
-              {({ input, meta }) => (
-                <div>
-                  <label>Dish name</label>
-                  <input {...input} type="text" placeholder="Dish Name" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
-              )}
-            </Field>
-          </div>
-          <div>
-            <Field name="preparation_time" validate={required}>
-              {({ input, meta }) => (
-                <div>
-                  <label>Preparation Time</label>
-                  <input {...input} type="time" step="1" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
-              )}
-            </Field>
-          </div>
+          <InputField
+            name="name"
+            validation={required}
+            label="Dish Name"
+            type="text"
+            placeholder="Dish Name"
+          />
+
+          <InputField
+            name="preparation_time"
+            validation={required}
+            label="Preparation Time"
+            type="time"
+            step="1"
+          />
+
           <div>
             <label>Type</label>
             <Field name="type" component="select" validate={required}>
@@ -113,7 +123,7 @@ const AddDishForm = (props) => {
               <option value="soup">Soup</option>
               <option value="sandwich">Sandwich</option>
             </Field>
-
+            <Error name="type" />
             <OnChange name="type">
               {(selectValue) => {
                 setType(selectValue);
@@ -123,20 +133,13 @@ const AddDishForm = (props) => {
           </div>
           {type === "pizza" && (
             <Fragment>
-              <Field name="no_of_slices" validate={required}>
-                {({ input, meta }) => (
-                  <div>
-                    <label>Number of Slices</label>
-                    <input
-                      {...input}
-                      type="number"
-                      placeholder="Number of Slices"
-                    />
-
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
+              <InputField
+                name="no_of_slices"
+                validation={required}
+                label="Number of Slices"
+                type="number"
+                placeholder="Number of Slices"
+              />
               <OnChange name="no_of_slices">
                 {(inputValue) => {
                   setTypeSpecific((prevState) => ({
@@ -148,20 +151,14 @@ const AddDishForm = (props) => {
                   }));
                 }}
               </OnChange>
-              <Field name="diameter" validate={required}>
-                {({ input, meta }) => (
-                  <div>
-                    <label>Diameter</label>
-                    <input
-                      {...input}
-                      type="number"
-                      step="0.1"
-                      placeholder="Diameter"
-                    />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
+              <InputField
+                name="diameter"
+                validation={required}
+                label="Diameter"
+                type="number"
+                step="0.1"
+                placeholder="Diameter"
+              />
               <OnChange name="diameter">
                 {(inputValue) => {
                   setTypeSpecific((prevState) => ({
@@ -174,23 +171,19 @@ const AddDishForm = (props) => {
           )}
           {type === "soup" && (
             <Fragment>
-              <Field
+              <InputField
                 name="spiciness_scale"
-                validate={multipleValidations(
+                validation={multipleValidations(
                   required,
                   mustBeNumber,
                   minValue(1),
                   maxValue(10)
                 )}
-              >
-                {({ input, meta }) => (
-                  <div>
-                    <label>Spiciness</label>
-                    <input {...input} type="number" placeholder="1-10" />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
+                label="Spiciness"
+                type="number"
+                placeholder="1-10"
+              />
+
               <OnChange name="spiciness_scale">
                 {(inputValue) => {
                   setTypeSpecific((prevState) => ({
@@ -206,22 +199,13 @@ const AddDishForm = (props) => {
           )}
           {type === "sandwich" && (
             <Fragment>
-              <Field
+              <InputField
                 name="slices_of_bread"
-                validate={multipleValidations(required, mustBeNumber)}
-              >
-                {({ input, meta }) => (
-                  <div>
-                    <label>Number of slices of bread required</label>
-                    <input
-                      {...input}
-                      type="number"
-                      placeholder="Bread Slices"
-                    />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
+                validation={multipleValidations(required, mustBeNumber)}
+                label="Number of slices of bread required"
+                type="number"
+                placeholder="Bread Slices"
+              />
               <OnChange name="slices_of_bread">
                 {(inputValue) => {
                   setTypeSpecific((prevState) => ({
