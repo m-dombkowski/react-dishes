@@ -1,9 +1,10 @@
 import AddDishForm from "./components/AddDishForm/AddDishForm";
-import "./App.css";
+
+import styles from "./App.module.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.app}>
       <AddDishForm />
     </div>
   );

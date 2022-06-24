@@ -1,21 +1,31 @@
 import { Fragment } from "react";
 import { Field } from "react-final-form";
+import styles from "./InputField.module.css";
 
 const InputField = (props) => {
   return (
     <Fragment>
-      <Field name={props.name} validate={props.validation}>
+      <Field name={props.name} validate={props.validation} parse={props.parse}>
         {({ input, meta }) => (
-          <div>
-            <label>{props.label}</label>
+          <div className={styles.inputContainer}>
+            <label className={styles.inputLabel}>{props.label}</label>
             <input
               {...input}
+              className={[
+                styles.input,
+                meta.active ? styles.inputFocus : "",
+                meta.error && meta.touched ? styles.inputError : "",
+                meta.touched && !meta.error ? styles.inputOk : "",
+              ].join(" ")}
               type={props.type}
               placeholder={props.placeholder}
               step={props.step}
             />
             {meta.error && meta.touched && (
-              <span className="errorMess">{meta.error}</span>
+              <span className={styles.errorMessage}>❕ {meta.error}</span>
+            )}
+            {!meta.error && meta.touched && (
+              <span className={styles.okMessage}>👍</span>
             )}
           </div>
         )}

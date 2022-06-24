@@ -3,11 +3,152 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 200px;
-  font-size: 22px;
+  padding: 2em 5em;
+  border: 1px solid #eee;
+  box-shadow: 2px 2px 6px -1px #42445a;
+  border-radius: 1em;
+  background-color: #faf5ff;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+.title {
+  font-size: 2.6em;
+}
+
+.dishEmoji {
+  font-size: 2.6em;
+}
+
+.selectField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  width: 100%;
+  align-items: flex-start;
+
+  position: relative;
+}
+
+.typeLabel {
+  font-size: 2em;
+}
+
+select {
+  transition: all 0.2s;
+}
+
+select:focus {
+  outline: none;
+  border: 1px solid #00a8ff !important;
+  box-shadow: 0px 0px 3px 0px #00a8ff;
 }
 
 .type {
-  height: 50px;
-  width: 100px;
+  font-size: 1.8em;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #d9dade !important;
+  border-radius: 0.5em;
+  width: 245px;
+}
+
+.errorSelect {
+  border: 1px solid #ea2027 !important;
+}
+
+.okSelect {
+  border: 1px solid #0dfb43 !important;
+}
+
+.selectOk {
+  position: absolute;
+  font-size: 2em;
+  bottom: -1.6em;
+}
+
+.preview {
+  font-size: 2em;
+}
+
+.selectErrorMessage {
+  background-color: #ea2027;
+  border-radius: 1.5em;
+  box-shadow: 2px 2px 8px -3px #42445a;
+  font-size: 1.6em;
+  padding: 0.3em 0.9em;
+  font-weight: bold;
+}
+
+.buttonsContainer {
+  margin-top: 6em;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.submitButton,
+.clearFormButton {
+  padding: 1em 2em;
+  border-radius: 0.5em;
+  border: none;
+  font-weight: bold;
+  font-size: 1.4em;
+  transition: all 0.3s;
+}
+
+.submitButton {
+  border: 1px solid transparent;
+  background-color: #25fb56;
+  box-shadow: -2px 2px 8px -3px #42445a;
+}
+
+.clearFormButton {
+  border: 1px solid #d9dade;
+  background-color: #fff;
+  box-shadow: 2px 2px 8px -3px #42445a;
+}
+
+.submitButton:hover,
+.clearFormButton:hover {
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #0ce23c;
+}
+
+.clearFormButton:hover {
+  background-color: #f5f5f5;
+}
+
+.requestFailedMessage {
+  position: absolute;
+  bottom: -7em;
+  font-size: 1.8em;
+  width: 70%;
+  border-radius: 0.5em;
+  padding: 0.4em 0.8em;
+  background-color: #ea2027;
+  font-weight: bold;
+  box-shadow: 2px 2px 8px -3px #42445a;
+}
+
+.requestSuccessContainer {
+  position: absolute;
+  bottom: -20em;
+  width: 70%;
+}
+
+.requestSuccessTitle {
+  font-size: 2em;
+}
+
+.requestSuccessMessage {
+  font-size: 1.6em;
 }
