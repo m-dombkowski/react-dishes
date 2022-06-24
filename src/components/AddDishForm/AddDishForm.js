@@ -14,18 +14,26 @@ import {
   Error,
 } from "../../helpers/selectTypeHelpers";
 
-const AddDishForm = (props) => {
+const AddDishForm = () => {
   const [type, setType] = useState(null);
   const [requestError, setRequestError] = useState(false);
   const [requestErrorMsg, setRequestErrorMsg] = useState("");
   const [requestSuccess, setRequestSuccess] = useState(false);
   const [requestSuccessMessage, setRequestSuccessMessage] = useState("");
 
+  /*
+  setting error message for POST request. Depeneding on what is available
+  */
+
   const setError = (obj, error) => {
     for (const key in obj) {
       setRequestErrorMsg(obj[key] ?? error.message);
     }
   };
+
+  /*
+   simple post request using axios clearing all the error/success message submit before sending request so if user had an error after previous request small message window will disappear 
+  */
 
   const onSubmit = (values) => {
     setRequestError(false);
@@ -48,8 +56,7 @@ const AddDishForm = (props) => {
   };
 
   /* 
-  works but code quality is tragic. Guess it's ok for small form but bigger it gets the worse it will be to handle and maintain.
-  No idea how to make it better with React Final Form values object.
+  It's definitely not the best way to implement this logic but I guess it's ok-ish for small form like this one.
   Purpose of this function is to clear 'subtypes' like number of slices, diameter values if user switch to a different type of food. 
   */
 
@@ -73,8 +80,12 @@ const AddDishForm = (props) => {
     }
   };
 
-  // this one seems better and more "universal" but doesn't really work with React Final Form values object.
-  // Would need to make separate states for each input and later somehow merge them into one big object
+  /* 
+  this one seems better and more "universal" but doesn't really work with React Final Form values object. Would need to make separate state for all of the data with nested objects for types and transform it later to one object without any nesting.
+  */
+  /*
+  What this loop does is to basically loop through whole object, later through types and if type (key) is not the same as selected one all of it's children are cleared (set to undefined)
+  */
 
   /*
   const resettingOtherTypes = (obj, selectedType) => {
@@ -206,7 +217,7 @@ const AddDishForm = (props) => {
             <div className={styles.buttonsContainer}>
               <button
                 type="submit"
-                disabled={pristine}
+                disabled={submitting || pristine}
                 className={styles.submitButton}
               >
                 Submit
@@ -237,7 +248,6 @@ const AddDishForm = (props) => {
                 </p>
               </div>
             )}
-            {/* <pre className={styles.preview}>{JSON.stringify(values, 0, 2)}</pre> */}
           </form>
         )}
       ></Form>
