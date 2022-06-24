@@ -127,13 +127,25 @@ select:focus {
   background-color: #f5f5f5;
 }
 
-.requestFailedMessage {
+.requestFailedContainer {
   position: absolute;
-  bottom: -7em;
-  font-size: 1.8em;
+  bottom: -15em;
   width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.requestFailedTitle {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.requestFailedMessage {
+  font-size: 1.6em;
   border-radius: 0.5em;
-  padding: 0.4em 0.8em;
+  padding: 0.4em;
+  width: inherit;
   background-color: #ea2027;
   font-weight: bold;
   box-shadow: 2px 2px 8px -3px #42445a;
