@@ -7,7 +7,6 @@ import {
   errorByRequestStatus,
   generateUniqueId,
   validationObj,
-  setError,
 } from "../../validation/validationFunctions";
 import axios from "axios";
 import {
@@ -103,6 +102,8 @@ const AddDishForm = () => {
     }
   };
   */
+
+  //Passing this through props to 'success modal'
 
   const closeModalHandler = () => {
     setRequestSuccess(false);
