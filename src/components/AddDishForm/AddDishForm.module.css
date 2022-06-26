@@ -156,3 +156,16 @@ select:focus {
   font-weight: bold;
   box-shadow: 2px 2px 8px -3px #42445a;
 }
+
+@media (max-width: 800px) {
+  .gridTwoCols {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+}
+
+@media (max-width: 360px) {
+  .form {
+    padding: 2em 2em;
+  }
+}

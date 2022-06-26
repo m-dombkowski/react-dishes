@@ -128,7 +128,7 @@ const AddDishForm = () => {
           reset,
         }) => (
           <div className={requestSuccess ? styles.gridTwoCols : ""}>
-            <div>
+            <div className={styles.smallMediaCenter}>
               <header className={styles.header}>
                 <h1 className={styles.title}>Create your own dish!</h1>
                 <span className={styles.dishEmoji}>🍜</span>
