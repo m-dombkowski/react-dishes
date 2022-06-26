@@ -39,7 +39,7 @@ const AddDishForm = () => {
     setRequestErrorMsg("");
     axios({
       method: "post",
-      url: "https://frosty-wood-6558.getsandbox.com:443/dishes",
+      url: process.env.REACT_APP_API_KEY,
       data: { ...values, id: generateUniqueId() },
       headers: { "content-type": "application/json" },
     })
@@ -245,7 +245,7 @@ const AddDishForm = () => {
                 <div className={styles.buttonsContainer}>
                   <button
                     type="submit"
-                    title="Submit your informations"
+                    title="Submit your information"
                     disabled={submitting || pristine}
                     className={styles.submitButton}
                   >
@@ -261,7 +261,7 @@ const AddDishForm = () => {
                     disabled={submitting || pristine}
                     className={styles.clearFormButton}
                   >
-                    Clear
+                    Reset
                   </button>
                 </div>
                 {isSending && <Spinner />}

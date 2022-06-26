@@ -43,6 +43,8 @@ export const generateUniqueId = () => {
   );
 };
 
+// With some docs and possible status codes this could be expanded
+
 export const errorByRequestStatus = (error, setError) => {
   if (error.response.status === 400) {
     let obj = error.response.data;
