@@ -1,8 +1,10 @@
 # Quick guide on how to start this app
 
-After opening it run 'npm init' in the terminal and install all the dependencies that were used in this project.
+After opening folder (I used VS Code) type 'npm install' in the terminal, wait for all the dependecies to install (it may take a bit).
 
-After successful installation type 'npm start' in the terminal and wait for the local host to open automatically (more about that below)
+Later type 'npm init' in the terminal and follow the instructions
+
+Last step is to type 'npm start' in the terminal and wait for the local host to open automatically (more about that in README.md or on the Github repo description :) )
 
 And that's really it. Hope you enjoy it. If you have any questions please feel free to contact me.
 
