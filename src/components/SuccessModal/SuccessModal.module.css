@@ -1,0 +1,45 @@
+.successModalContainer {
+  /* width: 70%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.requestSuccessTitle {
+  font-size: 1.5rem;
+  border-radius: 0.5em;
+  padding: 0.4em;
+  background-color: #0dfb43;
+  width: inherit;
+  box-shadow: 4px 4px 8px -5px #42445a;
+}
+
+.dataContainer {
+  border: 1px solid #eee;
+  border-radius: 1em;
+  padding: 3em 4em;
+  box-shadow: 2px 2px 8px -3px #42445a;
+  background-color: #fbf7ff;
+}
+
+.headerFlex {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.closeModal {
+  font-size: 2em;
+  padding: 0.5em 0.7em;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  box-shadow: 2px 2px 8px -3px #42445a;
+  transition: all 0.3s;
+}
+
+.closeModal:hover {
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}

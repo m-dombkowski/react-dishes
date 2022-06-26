@@ -20,6 +20,7 @@ const InputField = (props) => {
               type={props.type}
               placeholder={props.placeholder}
               step={props.step}
+              maxLength={props.maxLength}
             />
             {meta.error && meta.touched && (
               <span className={styles.errorMessage}>❕ {meta.error}</span>

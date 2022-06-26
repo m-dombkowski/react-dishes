@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  /* border: 1px solid #eee; */
+  border-radius: 1em;
+  margin-bottom: 2rem;
+  padding: 0 1em;
+  box-shadow: 2px 2px 8px -3px #42445a;
+  background-color: #ffe4ee;
+}
+
+.container:last-child {
+  margin-bottom: 0;
+}
+
+.propertyName {
+  font-size: 2.2em;
+  margin: 0.5rem 0;
+}
+
+.valuesData {
+  font-size: 1.8em;
+  margin: 0.5rem 0 1.5rem 0;
+  font-weight: bold;
+}

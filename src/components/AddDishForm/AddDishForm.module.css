@@ -12,8 +12,14 @@
   position: relative;
 }
 
+.gridTwoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .header {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 2em;
 }
@@ -149,18 +155,4 @@ select:focus {
   background-color: #ea2027;
   font-weight: bold;
   box-shadow: 2px 2px 8px -3px #42445a;
-}
-
-.requestSuccessContainer {
-  position: absolute;
-  bottom: -20em;
-  width: 70%;
-}
-
-.requestSuccessTitle {
-  font-size: 2em;
-}
-
-.requestSuccessMessage {
-  font-size: 1.6em;
 }

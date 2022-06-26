@@ -1,4 +1,4 @@
-## Quick guide on how to start this app
+# Quick guide on how to start this app
 
 After opening it run 'npm init' in the terminal and install all the dependencies that were used in this project.
 
@@ -6,7 +6,7 @@ After successful installation type 'npm start' in the terminal and wait for the 
 
 And that's really it. Hope you enjoy it. If you have any questions please feel free to contact me.
 
-# Getting Started with Create React App
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
